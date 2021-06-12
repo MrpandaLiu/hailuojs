@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+    </div>
+</body>
+<!-- <script src="https://cdn.jsdelivr.net/npm/hailuo@1.0.6/lib/index.min.js"></script> -->
+<script src="./lib/index.js"></script>
+<script>
+
+    const Card = Hailuo.createApp(`
+        <div>
+            <div h-click="change">I am a card</div>
+            <span h-bind="name.first"></span>
+            <div h-if="visible">hahaha</div>
+        </div>
+    `);
+
+    Card.useReactive({
+        name: {
+            first: 'xiaoxiongmao',
+            last: 'daxiongmao'
+        },
+        visible: true,
+        count: 0
+    });
+
+    Card.register('change', () => {
+        Card.states.name.first = Card.states.name.first + '1234';
+        Card.states.count++;
+        if(Card.states.count % 2 !== 0) {
+            Card.states.visible = false;
+        } else {
+            Card.states.visible = true;
+        }
+    })
+
+    Hailuo.define('card', Card);
+
+    const App = Hailuo.createApp(`
+        <span h-bind="name"></span>
+        <input h-bind="name" />
+        <ul h-for="list">
+            <li>this is  <span h-bind="item.label"></span>: <span h-bind="item.value"></span></li>
+        </ul>
+        <button h-click="handleClick">click</button>
+        <card />
+    `);
+
+    App.useReactive({
+        name: 'panda',
+        list: [{label: 'name', value: 'cat'}],
+        user: {
+            name: 'cat'
+        }
+    });
+
+    App.register('handleClick', () => {
+        App.states.name = 'cart';
+        App.states.list = [2,4,56,8];
+    });
+    
+    Hailuo.define('app', App);
+    document.querySelector('#root').appendChild(window.Hailuo.app);
+</script>
+</html>

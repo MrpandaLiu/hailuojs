@@ -1,0 +1,14 @@
+{
+  "name": "hailuo",
+  "version": "1.0.6",
+  "description": "a light framework of frontend",
+  "main": "./lib/index.js",
+  "files": [
+    "lib/"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "liuchang.panda",
+  "license": "ISC"
+}
