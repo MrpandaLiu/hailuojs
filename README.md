@@ -11,7 +11,7 @@
 
 2. 创建一个`app`对象
 ``` js
-const App = Hailuo.createApp(`
+const App = H.createApp(`
     <div>
         My name is: 
         <span h-bind="test"></span>
@@ -36,7 +36,7 @@ App.register('handleClick', () => {
 
 5. 将该组件定义到全局`Hailuo`对象中
 ``` js
-Hailuo.define('app', App);
+H.define('app', App);
 ```
     
 6. 将组件添加到当前DOM树中
