@@ -9,3 +9,5 @@
 1.0.5 feat: 引入h-if & 支持input标签使用h-bind
 
 1.0.6 chore: 更新部分定义name
+
+1.1.0 refactor: 添加webpack打包机制
