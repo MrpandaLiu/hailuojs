@@ -39,9 +39,12 @@ App.register('handleClick', () => {
 H.define('app', App);
 ```
     
-6. 将组件添加到当前DOM树中
+6. 当组件编译完成后，将组件添加到当前DOM树中
 ``` js
-document.querySelector('#root').appendChild(window.Hailuo.app);
+App.onMount(() => {
+    console.log('this is mounted');
+    console.log(document.querySelector('#card'));
+});
 ```
 
 ## 2. API参考
