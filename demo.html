@@ -30,15 +30,24 @@
         count: 0
     });
 
-    Card.register('change', () => {
-        Card.states.name.first = Card.states.name.first + '1234';
-        Card.states.count++;
-        if(Card.states.count % 2 !== 0) {
-            Card.states.visible = false;
+    Card.register('change', function() {
+        this.states.name.first = Card.states.name.first + '1234';
+        this.states.count++;
+        if(this.states.count % 2 !== 0) {
+            this.states.visible = false;
         } else {
-            Card.states.visible = true;
+            this.states.visible = true;
         }
     })
+
+    App.onCreate(() => {
+        console.log('this is created');
+    });
+
+    Card.onMount(function() {
+        console.log(this.states.count);
+        console.log('this is mounted');
+    });
 
     H.define('card', Card);
 
@@ -64,8 +73,14 @@
         App.states.name = 'cart';
         App.states.list = [2,4,56,8];
     });
+
+    App.onMount(() => {
+        console.log('this is mounted');
+        document.querySelector('#root').appendChild(window.Hailuo.app);
+        App.states.name = App.states.name + 'mounted';
+        console.log(document.querySelector('#card'));
+    });
     
     H.define('app', App);
-    document.querySelector('#root').appendChild(window.Hailuo.app);
 </script>
 </html>

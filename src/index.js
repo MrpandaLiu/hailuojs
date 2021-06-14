@@ -7,6 +7,8 @@ class Hailuo {
         this.states = {};
         this.mutations = {};
         this.renderer = html;
+        this.created = () => {};
+        this.mounted = () => {};
     }
 
     useReactive(obj) {
@@ -14,7 +16,7 @@ class Hailuo {
     }
 
     register(name, fn) {
-        this.mutations[name] = fn;
+        this.mutations[name] = fn.bind(this);
     }
 
     render(root) {
@@ -86,6 +88,16 @@ class Hailuo {
         };
         compile(root);
     }
+
+    onCreate(cb) {
+        if(typeof cb !== 'function') throw new Error('arguments should be function.');
+        this.created = cb.bind(this);
+    }
+    
+    onMount(cb) {
+        if(typeof cb !== 'function') throw new Error('arguments should be function.');
+        this.mounted = cb.bind(this);
+    }
 };
 
 Hailuo.createApp = (html) => {
@@ -93,11 +105,13 @@ Hailuo.createApp = (html) => {
 }
 
 Hailuo.define = (name, app) => {
+    app.created();
     const root = document.createElement('div');
     root.id = name;
     root.innerHTML = app.renderer;
     app.render(root);
     window.Hailuo[name] = root;
+    app.mounted();
 }
 
 ((window) => {

@@ -11,3 +11,5 @@
 1.0.6 chore: 更新部分定义name
 
 1.1.0 refactor: 添加webpack打包机制
+
+1.1.1 feat: 简单支持生命周期
