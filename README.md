@@ -43,7 +43,7 @@ H.define('app', App);
 ``` js
 App.onMount(() => {
     console.log('this is mounted');
-    console.log(document.querySelector('#card'));
+    document.querySelector('#root').appendChild(window.Hailuo.app);
 });
 ```
 
